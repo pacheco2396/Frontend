@@ -1,0 +1,67 @@
+<app-layout></app-layout>
+<div class="container">
+    
+        <br>
+        <div class="row">
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
+                        Crear nueva tarea
+                      </button>
+        </div>
+        <br>
+        <div class="row">
+            <div class="col-md-12" *ngFor= "let tarea of tareasService.tareas" style="padding: 5px, 5px, 5px, 5px !important;">
+    
+                <div class="card">
+                    <h5 class="card-header">{{ tarea.nombre }}</h5>
+                    <div class="card-body">
+                        
+                        <p class="card-text">{{ tarea.descripcion }} </p>
+                        <button type="button" class="btn btn-success" (click)= "editTarea(tarea)" data-toggle="modal" data-target="#exampleModalCenter">Editar</button>
+                                <button type="button" class="btn btn-danger " (click)= "deleteTarea(tarea._id)">Eliminar</button>
+                                
+                    </div>
+                </div>
+                <br>
+            </div>
+        </div>
+    </div>   
+    
+    <!-- Button trigger modal -->
+    
+          
+          <!-- Modal -->
+          <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModalLongTitle">Tareas</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                  <div class="row">
+                        
+                      <div class="col-md-12">
+                            <form #proyectoForm="ngForm">
+                    <div class="input-group mb-3">
+                        <input class="form-control" type="text" hidden name="_id" #_id = "ngModel" [(ngModel)]="tareasService.selectedTarea._id" >
+                    </div>
+                    <div class="input-group mb-3">
+                        <input class="form-control" type="text" name="nombre" #nombre = "ngModel" [(ngModel)]="tareasService.selectedTarea.nombre" placeholder="Nombre de la tarea">
+                    </div>
+                    <div class="input-group mb-3">
+                        <input class="form-control" type="text" name="descripcion" #descripcion = "ngModel" [(ngModel)]="tareasService.selectedTarea.descripcion" placeholder="Descripción de la tarea">
+                    </div>
+                    
+                </form>
+                </div>
+           
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)= "resetForm(proyectoForm)">Close</button>
+                  <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="addTarea(proyectoForm)">Guardar</button>
+                </div>
+              </div>
+            </div>
+          </div>

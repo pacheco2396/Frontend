@@ -1,0 +1,70 @@
+<app-layout></app-layout>
+<div class="container">
+    
+    <br>
+    <div class="row">
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
+                    Crear nuevo proyecto
+                  </button>
+    </div>
+    <br>
+    <div class="row">
+        <div class="col-md-12" *ngFor= "let proyecto of proyectosService.proyectos" style="padding: 5px, 5px, 5px, 5px !important;">
+
+            <div class="card">
+                <h5 class="card-header">{{ proyecto.nombre }}</h5>
+                <div class="card-body">
+                    <h5 class="card-title">{{ proyecto.fecha  | timeAgo}}</h5>
+                    <p class="card-text">{{ proyecto.descripcion }} </p>
+                    <a  class="btn btn-success" href="proyectos/{{proyecto._id}}">Ver</a>
+                    <button type="button" class="btn btn-primary" (click)= "editProyecto(proyecto)" data-toggle="modal" data-target="#exampleModalCenter">Editar</button>
+                    <button type="button" class="btn btn-danger " (click)= "deleteProyecto(proyecto._id)">Eliminar</button>
+                            
+                </div>
+            </div>
+            <br>
+        </div>
+    </div>
+</div>   
+
+<!-- Button trigger modal -->
+
+      
+      <!-- Modal -->
+      <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLongTitle">Proyectos</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <div class="row">
+                    
+                  <div class="col-md-12">
+                        <form #proyectoForm="ngForm" (ngSubmit)="addProyecto(proyectoForm)">
+                <div class="input-group mb-3">
+                    <input class="form-control" type="text" hidden name="_id" #_id = "ngModel" [(ngModel)]="proyectosService.selectedProyecto._id" >
+                </div>
+                <div class="input-group mb-3">
+                    <input class="form-control" type="text" name="nombre" #nombre = "ngModel" [(ngModel)]="proyectosService.selectedProyecto.nombre" placeholder="Nombre del Proyecto">
+                </div>
+                <div class="input-group mb-3">
+                    <input class="form-control" type="text" name="descripcion" #descripcion = "ngModel" [(ngModel)]="proyectosService.selectedProyecto.descripcion" placeholder="Descripción del Proyecto">
+                </div>
+                <div class="input-group mb-3">
+                    <input hidden class="form-control" type="text" name="usuario" #usuario = "ngModel" [(ngModel)]="proyectosService.selectedProyecto.usuario" placeholder="Escriba su usuario">
+                </div>
+            </form>
+            </div>
+       
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)= "resetForm(proyectoForm)">Cerrar</button>
+              <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="addProyecto(proyectoForm)">Guardar</button>
+            </div>
+          </div>
+        </div>
+      </div>

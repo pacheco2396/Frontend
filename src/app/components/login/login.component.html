@@ -1,0 +1,31 @@
+<app-layout></app-layout>
+<div class="container">
+        <div class="row">
+          <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
+            <div class="card card-signin my-5">
+              <div class="card-body">
+                <h2 class="card-title text-center">Inicio de Sesión</h2>
+                <form #userForm="ngForm" >
+                  <div class="form-label-group">
+                    
+                        <label for="inputEmail">Correo Electrónico</label>
+                    <input type="email" name="email" #email="ngModel" [(ngModel)]="userService.selectedUser.email" class="form-control" placeholder="Ingresa tu correo electrónico" required autofocus>
+                    
+                  </div>
+    
+                  <div class="form-label-group">
+                        <label for="inputPassword">Contraseña</label>
+                    <input type="password" name="password" #password="ngModel" [(ngModel)]="userService.selectedUser.password" class="form-control" placeholder="Contraseña" required>
+                    
+                  </div>
+    
+                  <br>
+                  <button class="btn btn-lg btn-primary btn-block" type="button" (click)="validarUser(userForm)">Inicia Sesión</button>
+                  <a href="/register" class="btn btn-lg btn-primary btn-block">Registrate</a>
+                  <hr class="my-4">
+                  </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
